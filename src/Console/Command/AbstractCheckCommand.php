@@ -7,11 +7,9 @@ namespace Symplify\EasyCodingStandard\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Contracts\Service\Attribute\Required;
-use Symplify\EasyCodingStandard\Application\EasyCodingStandardApplication;
 use Symplify\EasyCodingStandard\Configuration\ConfigurationFactory;
 use Symplify\EasyCodingStandard\Console\Output\ConsoleOutputFormatter;
 use Symplify\EasyCodingStandard\Console\Style\EasyCodingStandardStyle;
-use Symplify\EasyCodingStandard\Guard\LoadedCheckersGuard;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 
@@ -19,23 +17,15 @@ abstract class AbstractCheckCommand extends AbstractSymplifyCommand
 {
     protected EasyCodingStandardStyle $easyCodingStandardStyle;
 
-    protected EasyCodingStandardApplication $easyCodingStandardApplication;
-
-    protected LoadedCheckersGuard $loadedCheckersGuard;
-
     protected ConfigurationFactory $configurationFactory;
 
     #[Required]
     public function autowireAbstractCheckCommand(
         ConfigurationFactory $configurationFactory,
-        EasyCodingStandardApplication $easyCodingStandardApplication,
         EasyCodingStandardStyle $easyCodingStandardStyle,
-        LoadedCheckersGuard $loadedCheckersGuard
     ): void {
         $this->configurationFactory = $configurationFactory;
-        $this->easyCodingStandardApplication = $easyCodingStandardApplication;
         $this->easyCodingStandardStyle = $easyCodingStandardStyle;
-        $this->loadedCheckersGuard = $loadedCheckersGuard;
     }
 
     protected function configure(): void
